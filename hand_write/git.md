@@ -77,17 +77,82 @@ git checkout HEAD^2~2
 ## Push & Pull -- Git 远程仓库
 ### 1. git clone
 ### 2. 远程分支
+本地的远程分支不能提交代码，如果提交代码会进入HEAD分离状态，o/master不会跟着HEAD走
 ### 3. git fetch
+从远程拉取所有提交记录到本地的远程分支<br/>
 ### 4. git pull
 ### 5. 模拟团队合作
+`git fakeTeamwork master 3` 模拟给远程分支提交三个记录
 ### 6. git push
 ### 7. 偏离的提交历史
-## 关于 origin 和她的周边 -- Git 远程仓库高级操作
+###### 基于历史代码开发，别人修改了代码，提交时就会有问题
+最简单的方式 rebase
+````
+git fetch o/master
+git rebase o/master
+git push
+````
+还可以使用merge
+````
+git fetch o/master
+git merge o/master
+git push
+````
+简化命令
+`git pull --rebase; git push` or `git pull; git push`
+
+## 关于 origin 和它的周边 -- Git 远程仓库高级操作
 ### 1. 推送主分支
+````
+git fetch
+// 远程分支也可以rebase
+git rebase o/master side1 
+````
 ### 2. 合并远程仓库
+````
+git pull
+// 把side的改动合并到当前分支
+git merge side1
+````
 ### 3. 远程追踪
+###### pull 操作时，默认下载到 o/master， 合并到master分支上
+###### push 操作时，默认从master分支推送到 o/master
+###### 默认有远程追踪，通过 remote tracking 属性决定
+````
+// 远程追踪方式1 (设置其他分支的远程追踪)
+git checkout -b side1 o/master
+// 远程追踪方式2 (设置当前分支的远程追踪)
+git branch -u o/master
+````
 ### 4. git push 的参数
+````
+// 在别的分支时，就可以推送master分支
+git push origin master
+````
 ### 5. git push 的参数2
+````
+// 在别的分支时，推送side分支到o/master
+git push origin side:master
+````
 ### 6. git fetch 的参数
+````
+// 在别的分支时，拉取o/master分支到master分支
+git fetch origin master
+// 在别的分支时，拉取o/master分支到side分支
+git fetch origin master:side
+````
 ### 7. 没有 source 的 source
+````
+// 删除远程分支
+git push origin :side
+// 创建本地分支
+git fetch origin :bugFix
+````
 ### 8. git pull的参数
+````
+// 相当于git fetch origin master; git merge o/master
+// 就是说从远程拉取master分支，合并到当前分支
+git pull origin master
+// 从远程拉取master分支，合并到side分支
+git pull origin master:side
+````
