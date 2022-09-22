@@ -156,3 +156,8 @@ git pull origin master
 // 从远程拉取master分支，合并到side分支
 git pull origin master:side
 ````
+### 9. git 回退版本
+````
+git reset --hard HEAD^
+git push --force
+````

@@ -82,8 +82,8 @@
 ##### Mybatis 获取自动生成的主键？
     使用 insert 标签的 useGeneratedKeys = true， keyProperty = 'id'，插入完成后，id 属性会被自动填充
 ##### Mybatis 的缓存设计？ 一级缓存和二级缓存？
-    一级缓存：sqlSession级别的缓存，一级缓存是一直开启的，不需要手动开启
-    二级缓存：namespace级别的缓存，二级缓存需要手动开启
+    一级缓存：sqlSession级别的缓存，一级缓存是一直开启的，不同sqlSession的缓存不同
+    二级缓存：namespace级别（SqlSessionFactory级别，比sqlsession更大）的缓存，二级缓存需要手动开启
     一级缓存失效的情况：
         1. sqlSession不同
         2. sqlSession相同，查询条件不同
