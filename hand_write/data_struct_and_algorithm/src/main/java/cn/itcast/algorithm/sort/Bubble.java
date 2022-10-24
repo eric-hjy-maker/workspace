@@ -1,18 +1,20 @@
 package cn.itcast.algorithm.sort;
 //冒泡排序
 public class Bubble {
+
+    public static void sort_once(Comparable[] a, int lo, int hi) {
+        for (int i = lo; i+1 <= hi; i++) {
+            if (greater(a[i], a[i+1])){
+                exch(a, i, i+1);
+            }
+        }
+    }
     /*
        对数组a中的元素进行排序
     */
     public static void sort(Comparable[] a){
         for(int i=a.length-1;i>0;i--){
-            for(int j=0;j<i;j++){
-                //{6,5,4,3,2,1}
-                //比较索引j和索引j+1处的值
-                if (greater(a[j],a[j+1])){
-                    exch(a,j,j+1);
-                }
-            }
+            sort_once(a, 0, i);
         }
     }
 

@@ -1,22 +1,23 @@
 package cn.itcast.algorithm.sort;
 
 public class Selection {
+
+
+    public static void sort_once(Comparable[] a, int lo, int hi){
+        for (int i = lo; i <= hi; i++) {
+            if (greater(a[lo], a[i])){
+                exch(a, lo, i);
+            }
+        }
+    }
     /*
        对数组a中的元素进行排序
     */
     public static void sort(Comparable[] a){
+        // 外层循环控制要排序的数组范围
         for(int i=0;i<=a.length-2;i++){
-            //定义一个变量，记录最小元素所在的索引，默认为参与选择排序的第一个元素所在的位置
-            int minIndex = i;
-            for(int j=i+1;j<a.length;j++){
-                //需要比较最小索引minIndex处的值和j索引处的值；
-                if (greater(a[minIndex],a[j])){
-                    minIndex=j;
-                }
-            }
-
-            //交换最小元素所在索引minIndex处的值和索引i处的值
-            exch(a,i,minIndex);
+            // 对数组进行一次排序
+            sort_once(a, i, a.length-1);
         }
     }
 

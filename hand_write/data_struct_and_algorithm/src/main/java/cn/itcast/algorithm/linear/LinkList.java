@@ -156,24 +156,17 @@ public class LinkList<T> implements Iterable<T>{
         if (isEmpty()){
             return;
         }
-
         reverse(head.next);
     }
 
-    //反转指定的结点curr，并把反转后的结点返回
-    public Node reverse(Node curr){
-        if (curr.next==null){
-            head.next=curr;
-            return curr;
+    public void reverse(Node current){
+        if (current.next == null){
+            head.next = current;
+            return;
         }
-        //递归的反转当前结点curr的下一个结点；返回值就是链表反转后，当前结点的上一个结点
-        Node pre = reverse(curr.next);
-        //让返回的结点的下一个结点变为当前结点curr；
-        pre.next=curr;
-        //把当前结点的下一个结点变为null
-        curr.next=null;
-        return curr;
+        Node next = current.next;
+        reverse(current.next);
+        next.next = current;
+        current.next = null;
     }
-
-
 }
