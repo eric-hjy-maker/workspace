@@ -34,8 +34,8 @@
 ##### ConcurrentHashMap 如何实现多线程安全的？
     采用了分段加锁的机制，以数组里的链表为加锁单位，多线程在不同分段加锁，不会产生冲突，效率就比较高
 ##### 线程的状态
-![Java线程的六种状态](.review_images/3c85a523.png)
-![系统层面的五种状态](.review_images/4e6858ed.png)
+![Java线程的六种状态](images/.review_images/3c85a523.png)
+![系统层面的五种状态](images/.review_images/4e6858ed.png)
 ##### 线程的创建方式？
     1. 继承 Thread 类
     2. 实现 Runnable 接口
@@ -79,6 +79,10 @@
 ##### mysql 使用的索引数据结构？
     InnoDB用的是 B+ 树，索引和数据存放在一个文件，叶子节点上存数据，并且使用双向链表连接，非叶子节点不存数据
     MyISAM用的是 B+ 树，索引和数据存放在两个文件
+##### B+树相对于 B树的优点？
+    数据遍历：B+树节点连续，更适合遍历，B树只能用中序遍历
+    范围查找：B+树节点连续方便范围查找，B树不支持范围查找
+    查询效率：B+树查询效率更稳定一些
 ##### mysql explain？
     type：表示连接类型，如ALL、index、range、ref、eq_ref、const、system
     All：全表扫描
@@ -109,6 +113,15 @@
     解决：自己注入自己
     8. 锁失效
     解决：锁范围增大，锁住事务提交
+##### spring中使用了哪些设计模式
+    工厂模式：BeanFactory
+    模板模式：JdbcTemplate，空的方法实现，让我们自己扩展实现
+    单例模式：Spring中的Bean默认都是单例的
+    代理模式：AOP
+    适配器模式：HandlerAdapter
+    观察者模式：ApplicationEventPublisher
+##### 单例模式的作用
+    保证内存中只有一个实例，减少内存开销
 ##### 说说对 spring IOC 的理解？
     首先，IOC 是一个容器，负责管理 bean 的创建、销毁、依赖注入
     使用对象的时候，从容其中获取即可，不需要创建
@@ -164,7 +177,7 @@
     永久代是 1.8 之前的实现
     元空间是 1.8 之后的实现，使用本地内存
 ##### JVM 内存参数
-![](.review_images/5693b05d.png)
+![](images/.review_images/5693b05d.png)
 
     -XX:MaxNewSize=10m：新生代最大值
     -XX:NewSize=10m：新生代初始值
@@ -173,8 +186,8 @@
     -Xms:20m：新生代和老年代总和初始值
     -Xmx:20m：新生代和老年代总和最大值
 
-![元空间](.review_images/70cef40b.png)
-![JIT 热点代码使用的空间](.review_images/afe146e0.png)
+![元空间](images/.review_images/70cef40b.png)
+![JIT 热点代码使用的空间](images/.review_images/afe146e0.png)
 ##### 类的加载过程？
     1. 加载：将类的 .class 文件加载到内存
     2. 链接-验证：验证文件格式是否符合 java 规范

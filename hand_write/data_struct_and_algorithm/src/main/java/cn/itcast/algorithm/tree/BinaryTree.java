@@ -2,6 +2,8 @@ package cn.itcast.algorithm.tree;
 
 import cn.itcast.algorithm.linear.Queue;
 
+import java.util.Stack;
+
 public class BinaryTree<Key extends Comparable<Key>, Value> {
     //记录根结点
     private Node root;
@@ -325,6 +327,66 @@ public class BinaryTree<Key extends Comparable<Key>, Value> {
         max = maxL>maxR?maxL+1:maxR+1;
 
         return max;
+    }
+
+
+    // 非递归方式前序遍历
+    public Queue<Key> preErgodic_stack(){
+        Queue<Key> keys = new Queue<>();
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            Node n = stack.pop();
+            keys.enqueue(n.key);
+            if (n.right!=null){
+                stack.push(n.right);
+            }
+            if (n.left!=null){
+                stack.push(n.left);
+            }
+        }
+        return keys;
+    }
+
+    // 非递归方式中序遍历
+    public Queue<Key> midErgodic_stack(){
+        Queue<Key> keys = new Queue<>();
+        Stack<Node> stack = new Stack<>();
+        Node n = root;
+        while(n!=null || !stack.isEmpty()){
+            while(n!=null){
+                stack.push(n);
+                n = n.left;
+            }
+            n = stack.pop();
+            keys.enqueue(n.key);
+            n = n.right;
+        }
+        return keys;
+    }
+
+    // 非递归方式后序遍历
+    public Queue<Key> afterErgodic_stack(){
+        Queue<Key> keys = new Queue<>();
+        Stack<Node> stack = new Stack<>();
+        Node n = root;
+        Node last = null;
+        while(n!=null || !stack.isEmpty()){
+            while(n!=null){
+                stack.push(n);
+                n = n.left;
+            }
+            n = stack.peek();
+            if (n.right==null || n.right==last){
+                keys.enqueue(n.key);
+                stack.pop();
+                last = n;
+                n = null;
+            }else{
+                n = n.right;
+            }
+        }
+        return keys;
     }
 
 }

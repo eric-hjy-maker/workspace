@@ -175,22 +175,58 @@ class Solution {
         System.out.println(root);
         midTravel(root.right);
     }
-    public static void midTravel_stack(TreeNode root) {
-        // 栈方式中序遍历二叉树
+    // 栈的方式前序遍历二叉树
+    public static void preTravel_stack(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
-        TreeNode p = root;
-        while (p != null || !stack.empty()) {
-            while (p != null) {
-                stack.push(p);
-                p = p.left;
+        stack.push(root);
+        TreeNode curr;
+        while (!stack.empty()) {
+            curr = stack.pop();
+            System.out.println(curr.val);
+            if (curr.right != null) {
+                stack.push(curr.right);
             }
-            if (!stack.empty()) {
-                p = stack.pop();
-                System.out.println(p.val);
-                p = p.right;
+            if (curr.left != null) {
+                stack.push(curr.left);
             }
         }
     }
+    // 栈的方式中序遍历二叉树
+    public static void midTravel_stack(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+        while (curr != null || !stack.empty()) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            if (!stack.empty()) {
+                curr = stack.pop();
+                System.out.println(curr.val);
+                curr = curr.right;
+            }
+        }
+    }
+    //栈的方式后续遍历二叉树
+    public static void afterTravel_stack(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        List lst = new ArrayList<Integer>();
+        stack.push(root);
+        TreeNode curr;
+        while (!stack.empty()) {
+            curr = stack.pop();
+            lst.add(curr.val);
+            if (curr.left != null) {
+                stack.push(curr.left);
+            }
+            if (curr.right != null) {
+                stack.push(curr.right);
+            }
+        }
+        Collections.reverse(lst);
+        System.out.println(lst);
+    }
+    
     class SingleLinkedList {
         LinkNode head;
         LinkNode end;

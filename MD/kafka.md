@@ -23,7 +23,7 @@
     记录 broker 的信息、副本 leader信息
 ##### kafka 的操作
 topic 的操作
-![](.images/8b31c7d8.png)
+![](images/.images/8b31c7d8.png)
 ```bash
 # 创建 topic
 kafka-topics.sh --bootstrap-server hadoop102:9092 --topic first --create --partitions 3 --replication-factor 2
