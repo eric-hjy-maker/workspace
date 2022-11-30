@@ -3,23 +3,15 @@
 - 点对点模式：消费者主动从消息队列中拉取消息
 - 发布/订阅模式：消费者订阅消息队列，消息队列将消息推送给消费者
 ##### kafka 基础架构
-- kafka 集群由多个 broker 组成
-
-
+    - kafka 集群由多个 broker 组成
     数据量大的时候，将多个数据分片 partition 存储在不同的 broker 上
-- 消费者组 consumer group
-
-
+    - 消费者组 consumer group
     消费者组中的消费者共同消费一个 topic 的数据，提高消费效率
-- 副本
-
-
+    - 副本
     为了保证数据的可靠性，kafka 会将数据复制到其他 broker 上
     副本分为 leader 副本和 follower 副本
     消费、生产者都是和 leader 副本进行交互
-- zookeeper
-
-
+    - zookeeper
     记录 broker 的信息、副本 leader信息
 ##### kafka 的操作
 topic 的操作

@@ -292,3 +292,134 @@ class Solution {
     }
 }
 ```
+##### 阿里 医疗
+```java
+// 写出你所知道的单例模式
+class SingleModel {
+    private static SingleModel instance = new SingleModel();
+
+    private SingleModel() {
+    }
+
+    public static SingleModel getInstance() {
+        return instance;
+    }
+}
+class LazyMode {
+    private static volatile LazyMode instance;
+
+    private LazyMode() {
+    }
+    public static LazyMode getInstance() {
+        if (instance == null) {
+            synchronized (LazyMode.class) {
+                if (instance == null) {
+                    instance = new LazyMode();
+                }
+            }
+        }
+        return instance;
+    }
+}
+
+class Code {
+
+    public static void main(String[] args) {
+        threadPrint();
+    }
+
+    /**
+     * 有一个字符串它的构成是词+空格的组合，如“北京 杭州 杭州 北京”， 要求输入一个匹配模式(简单的以字符来写)， 比如 aabb, 来判断该字符串是否符合该模式，
+     * 举个例子：
+     * 1. pattern = "abba", str="北京 杭州 杭州 北京" 返回 true
+     * 2. pattern = "aabb", str="北京 杭州 杭州 北京" 返回 false
+     */
+    public static boolean matchPattern(String str, String pattern) {
+
+        if (str == null || pattern == null) {
+            return false;
+        }
+        if (str.isEmpty() || pattern.isEmpty()) {
+            return false;
+        }
+
+        String[] strs = str.split(" ");
+        if (strs.length != pattern.length()) {
+            return false;
+        }
+        Map<Character, String> c_s = new HashMap<>();
+        Map<String, Character> s_c = new HashMap<>();
+        for (int i = 0; i < pattern.length(); i++) {
+            char curr = pattern.charAt(i);
+            if (c_s.get(curr) != null) {
+                if (!c_s.get(curr).equals(strs[i])) {
+                    return false;
+                }
+            } else {
+                if (s_c.get(strs[i]) != null) {
+                    return false;
+                }
+                c_s.put(curr, strs[i]);
+                s_c.put(strs[i], curr);
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 顺序打印：让三个线程打印一个字符串 "alialiali....", 一个线程打印 'a', 一个线程打印 'l', 一个线程打印 'i'
+     */
+    private static Object lock = new Object();
+    private static int flag = 0;
+    public static void threadPrint() {
+        new Thread(() -> {
+            while (true) {
+                synchronized (lock) {
+                    while (flag % 3 != 0) {
+                        try {
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    System.out.print("a");
+                    flag++;
+                    lock.notifyAll();
+                }
+            }
+        }).start();
+        new Thread(() -> {
+            while (true) {
+                synchronized (lock) {
+                    while (flag % 3 != 1) {
+                        try {
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    System.out.print("l");
+                    flag++;
+                    lock.notifyAll();
+                }
+            }
+        }).start();
+        new Thread(() -> {
+            while (true) {
+                synchronized (lock) {
+                    while (flag % 3 != 2) {
+                        try {
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    System.out.print("i");
+                    flag++;
+                    lock.notifyAll();
+                }
+            }
+        }).start();
+    }
+}
+```
