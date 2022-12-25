@@ -20,6 +20,12 @@ public class ProxyFactory {
         Object proxyInstance = Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class[]{interfaceClass}, new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+                String mock = System.getProperty("mock");
+                if (mock != null && mock.startsWith("return:")) {
+                    return mock.substring(7);
+                }
+
                 Invocation invocation = new Invocation(interfaceClass.getName(),
                         method.getName(), method.getParameterTypes(), args);
                 HttpClient httpClient = new HttpClient();
@@ -31,7 +37,12 @@ public class ProxyFactory {
                 URL url = Loadbanlance.random(urls);
 
                 // 服务调用
-                String result = httpClient.send(url.getHostname(), url.getPort(), invocation);
+                String result = null;
+                try {
+                    result = httpClient.send(url.getHostname(), url.getPort(), invocation);
+                } catch (Exception e) {
+                    return "服务调用报错了";
+                }
                 return result;
             }
         });
