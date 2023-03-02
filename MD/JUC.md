@@ -354,12 +354,13 @@ public class LiveLock {
 ##### 饥饿
     现成的优先级太低，始终得不到CPU的调度执行
 #### ReentrantLock
-    具备以下特点：
-    可中断
-    可设置超时时间
-    可设置为公平锁
-    支持多个条件变量
-    和 synchronized 一样，支持可重入
+具备以下特点：
+- 可中断 (是指获取不到锁进入阻塞队列后，可以打断其等待的状态)
+- 可设置超时时间 (规定时间内，获取不到锁，就返回)
+- 可设置为公平锁
+- 支持多个条件变量
+
+和 synchronized 一样，支持可重入
 
 ```java
 import java.util.concurrent.locks.Condition;

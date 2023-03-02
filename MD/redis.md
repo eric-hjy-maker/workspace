@@ -1,5 +1,11 @@
 ###### video_url:https://www.bilibili.com/video/BV1cr4y1671t/?spm_id_from=333.337.search-card.all.click&vd_source=b60fb1a1a8f06e334bf9ca2665cdd202
 
+#### SQL 与 NoSQL
+    SQL: 指的是单条数据有结构，标准化的有几个字段
+    NoSQL: 相比之下，单条数据的 value 没有固定的几个字段，也就是没有结构
+#### 认识 Redis
+    全称：Remote Dictionary Server 远程字典服务器
+
 #### redis value 常见数据类型
 - string
 - hash {name:"jack", age:18}
@@ -102,7 +108,9 @@ class Code{
     先更新数据库，再删缓存，更优
 ##### 缓存的策略
     1. 缓存穿透：查询一个不存在的数据，导致数据库压力过大
-        解决方案：布隆过滤器，将所有可能存在的数据哈希到一个足够大的 bitmap 中，一个一定不存在的数据会被这个 bitmap 拦截掉，从而避免了对底层存储系统的查询压力
+        - 解决方案1：
+缓存空对象，将不存在的key，存入缓存，value设置为null
+        - 解决方案2：布隆过滤器，将所有可能存在的数据哈希到一个足够大的 bitmap 中，一个一定不存在的数据会被这个 bitmap 拦截掉，从而避免了对底层存储系统的查询压力
     2. 缓存击穿：热点key过期，大量并发请求这个key，导致数据库压力过大
         解决方案：加锁，只允许一个线程访问数据库，构建缓存，其他线程等待，等待时间过长，可以设置超时时间，超时后，直接返回
         解决方案：热点数据永不过期
