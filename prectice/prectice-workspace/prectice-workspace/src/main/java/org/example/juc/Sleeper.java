@@ -5,7 +5,7 @@ import lombok.SneakyThrows;
 public class Sleeper {
 
     @SneakyThrows
-    public static void sleep(int seconds) {
+    public static void sleep(long seconds) {
         Thread.sleep(1000 * seconds);
     }
 }

@@ -4,7 +4,7 @@ import lombok.SneakyThrows;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ReentrantLockTest {
+public class 类0302ReentrantLockTest {
 
     private static ReentrantLock lock = new ReentrantLock();
 
@@ -81,7 +81,7 @@ public class ReentrantLockTest {
                 System.out.println("t1没有获取到锁");
                 return;
             }
-            Sleeper.sleep(1);
+            Sleeper.sleep(1000);
             lock.unlock();
         }, "t1");
 
