@@ -41,7 +41,7 @@ HEAD 指向正在其基础上工作的提交记录<br/>
 ### 2. 交互式 rebase
 如果不清楚commitID, 就可以使用交互式rebase<br/>
 `git rebase -i HEAD~3` 交互式rebase<br/>
-##杂项
+## 杂项
 ### 1. 只取一个提交记录
 `git cherry-pick commitID`
 ### 2. 提交的技巧 #1 修改历史提交记录

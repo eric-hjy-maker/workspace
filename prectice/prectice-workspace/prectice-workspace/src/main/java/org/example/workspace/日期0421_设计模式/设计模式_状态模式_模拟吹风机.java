@@ -1,6 +1,6 @@
 package org.example.workspace.日期0421_设计模式;
 
-public class 日期0421_设计模式_状态模式_模拟吹风机 {
+class 日期0421_设计模式_状态模式_模拟吹风机 {
     public static void main(String[] args) {
         DryerSwitchContext context = new DryerSwitchContext();
         context.setDryerSwitch(DryerSwitchContext.CLOSING);

@@ -141,7 +141,7 @@ class StoppingState extends LiftState {
     }
 }
 
-public class 日期0421_设计模式_状态模式 {
+class 日期0421_设计模式_状态模式 {
 
     public static void main(String[] args) {
         Context context = new Context();
